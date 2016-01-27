@@ -5,7 +5,7 @@ if(isset($_POST['btn-save'])){
     $taskTitle = $_POST['task_title'];
     $toDo->setTitle($taskTitle);
 
-    if($toDo->create())
+    if($toDo->add())
     {
         header("Location: index.php?inserted");
     }
@@ -29,7 +29,7 @@ if(isset($_POST['btn-complete'])){
 if(isset($_POST['btn-delete'])){
     $taskId = $_POST['btn-delete'];
     $toDo->setId($taskId);
-    if($toDo->delete())
+    if($toDo->remove())
     {
         header("Location: index.php?completed");
     }
@@ -45,7 +45,6 @@ if(isset($_POST['btn-edit']))
     header("Location: edit.php?edit_id=$taskId");
 }
 
-$toDo->getList('35');
 ?>
 
 
@@ -81,7 +80,7 @@ $toDo->getList('35');
 </div>
 <ul>
     <?php
-    $toDo->getAll();
+    $toDo->all();
     ?>
 </ul>
 

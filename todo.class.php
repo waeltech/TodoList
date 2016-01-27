@@ -11,15 +11,6 @@ class todo{
     }
 
 
-    public function getList($id)
-    {
-        $stmt = $this->db->prepare("SELECT * FROM tbltodo WHERE id=:id");
-        $stmt->execute(array(":id"=>$id));
-        $editRow=$stmt->fetch(PDO::FETCH_ASSOC);
-        return $editRow;
-    }
-
-
     /**
      * @param mixed $id
      */
@@ -45,7 +36,37 @@ class todo{
     }
 
 
-    function getAll(){
+    public function add(){
+        try{
+            $stmt = $this->db->prepare("INSERT INTO tbltodo(title) VALUES(:title)");
+            $stmt->bindparam(":title",$this->title);
+            $stmt->execute();
+            return true;
+        }catch(PDOException $e){
+            echo $e->getMessage();
+            return false;
+        }
+
+    }
+
+
+    public function get($id)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM tbltodo WHERE id=:id");
+        $stmt->execute(array(":id"=>$id));
+        $editRow=$stmt->fetch(PDO::FETCH_ASSOC);
+        return $editRow;
+    }
+
+    public function remove(){
+        $stmt = $this->db->prepare("DELETE FROM tbltodo WHERE id=:id");
+        $stmt->bindparam(":id",$this->id);
+        $stmt->execute();
+        return true;
+    }
+
+
+    function all(){
         $stmt = $this->db->prepare("SELECT * FROM tbltodo ORDER BY id DESC ");
         $stmt->execute();
 
@@ -78,21 +99,25 @@ class todo{
             echo "<h1> There is no list </h1>";
         }
     }
-
-
-
-    public function create(){
-        try{
-            $stmt = $this->db->prepare("INSERT INTO tbltodo(title) VALUES(:title)");
-            $stmt->bindparam(":title",$this->title);
-            $stmt->execute();
-            return true;
-        }catch(PDOException $e){
-            echo $e->getMessage();
-            return false;
-        }
-
+    // *************************************************************************************
+    // ****** the next function can be used to return the completed and incompleted ********
+    //**************************************************************************************
+    public function completed($status)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM tbltodo WHERE completed=:completed");
+        $stmt->execute(array(":completed"=>$status));
+        $editRow=$stmt->fetch(PDO::FETCH_ASSOC);
+        return $editRow;
     }
+
+    public function active($status)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM tbltodo WHERE completed=:completed");
+        $stmt->execute(array(":completed"=>$status));
+        $editRow=$stmt->fetch(PDO::FETCH_ASSOC);
+        return $editRow;
+    }
+
 
     public function complete(){
         try{
@@ -124,11 +149,6 @@ class todo{
 
     }
 
-    public function delete(){
-        $stmt = $this->db->prepare("DELETE FROM tbltodo WHERE id=:id");
-        $stmt->bindparam(":id",$this->id);
-        $stmt->execute();
-        return true;
-    }
+
 
 }

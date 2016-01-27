@@ -4,7 +4,7 @@ include 'config.php';
 if(isset($_GET['edit_id']))
 {
     $id = $_GET['edit_id'];
-    extract($toDo->getList($id));
+    extract($toDo->get($id));
 }
 if(isset($_POST['btn-save']))
 {
