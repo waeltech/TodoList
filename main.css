@@ -1,0 +1,61 @@
+body{
+    width: 80%;
+    margin: 0 auto !important;
+}
+.form-control{
+    width: 20% !important;
+    display: block;
+    margin-bottom: 10px;
+    margin: 0 auto;
+}
+.chkbox {
+    display: block;
+    margin: 20px auto;
+}
+.btn12{
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    margin: 20px auto;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+
+h3,h1{
+    text-align: center;
+}
+h2,p{
+    font-size:100%;
+    font-weight:normal;
+}
+li{
+    list-style:none;
+    background: #ffc;
+    width: 20%;
+}
+ul{
+    overflow:hidden;
+    padding:3em;
+}
+ul li a{
+    text-decoration:none;
+    color:#000;
+    background:#ffc;
+    display:block;
+    height:10em;
+    width:10em;
+    padding:1em;
+}
+ul li{
+    margin:1em;
+    float:left;
+}
+ol{text-align:center;}
+ol li{display:inline;padding-right:1em;}
+ol li a{color:#fff;}
